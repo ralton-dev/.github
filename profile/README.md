@@ -22,6 +22,7 @@ Most of these run in my homelab or grew out of my day-to-day work. They are buil
 | [aws-network-atlas](https://github.com/ralton-dev/aws-network-atlas) | Scans AWS accounts read-only and renders an interactive, committable network and security diagram. |
 | [tf-import-blocks](https://github.com/ralton-dev/tf-import-blocks) | Generates Terraform `import` blocks from a state file, with the correct import id per resource type. |
 | [zfs_exporter_image](https://github.com/ralton-dev/zfs_exporter_image) | Multi-arch container image of the `pdf/zfs_exporter` Prometheus exporter. |
+| [vercel-discord-alerts](https://github.com/ralton-dev/vercel-discord-alerts) | Relays Vercel webhooks (failed deployments, spend alerts, firewall and observability alerts) to Discord as embeds. |
 
 ## Using these
 
