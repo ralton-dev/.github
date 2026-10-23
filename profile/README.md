@@ -14,6 +14,7 @@ Most of these run in my homelab or grew out of my day-to-day work. They are buil
 | [url_utilities](https://github.com/ralton-dev/url_utilities) | Headless URL shortener with QR code generation. |
 | [url_utilities_admin](https://github.com/ralton-dev/url_utilities_admin) | Admin UI for `url_utilities`. |
 | [discord_github_docs_bot](https://github.com/ralton-dev/discord_github_docs_bot) | Discord bot that answers questions about a project from its own code and docs, with citations. |
+| [immich-enhancer](https://github.com/ralton-dev/immich-enhancer) | Enlarge old, low-resolution photos in Immich: tag one, and a Real-ESRGAN upscale and a pixel-doubled copy are stacked on the untouched original. |
 
 ## Infrastructure tools
 
