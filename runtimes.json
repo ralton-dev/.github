@@ -1,0 +1,30 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": ["The runtime lines every repo is on. Raise a ceiling here to move the whole fleet."],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Read a `>=N` Node floor in package.json engines as a Node pin, so it moves with CI, .nvmrc and the Docker base.",
+      "managerFilePatterns": ["/(^|/)package\\.json$/"],
+      "matchStrings": ["\"engines\"\\s*:\\s*\\{[^}]*?\"node\"\\s*:\\s*\">=\\s*(?<currentValue>\\d+(?:\\.\\d+){0,2})\\s*\""],
+      "depNameTemplate": "node",
+      "depTypeTemplate": "engines-floor",
+      "datasourceTemplate": "node-version",
+      "extractVersionTemplate": "^v?(?<version>\\d+)\\.",
+      "versioningTemplate": "loose"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "Node.js line: stay on 26 until this ceiling is raised.",
+      "matchPackageNames": ["node", "@types/node", "actions/node-versions"],
+      "allowedVersions": "<27"
+    },
+    {
+      "description": "Move every Node pin in a repo to a new major in one PR.",
+      "matchPackageNames": ["node", "@types/node", "actions/node-versions"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "Node.js runtime"
+    }
+  ]
+}
