@@ -8,7 +8,8 @@
     "config:recommended",
     ":dependencyDashboard",
     ":timezone(Europe/London)",
-    "helpers:pinGitHubActionDigestsToSemver"
+    "helpers:pinGitHubActionDigestsToSemver",
+    "github>ralton-dev/.github:runtimes"
   ],
   "schedule": ["on monday"],
   "labels": ["dependencies"],
