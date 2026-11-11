@@ -1,0 +1,61 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": [
+    "Shared Renovate policy for every ralton-dev and bralton repo.",
+    "A repo opts in with `\"extends\": [\"github>ralton-dev/.github\"]` and keeps only its own grouping rules and dashboard title."
+  ],
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":timezone(Europe/London)",
+    "helpers:pinGitHubActionDigestsToSemver"
+  ],
+  "schedule": ["on monday"],
+  "labels": ["dependencies"],
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 10,
+  "rebaseWhen": "auto",
+  "minimumReleaseAge": "3 days",
+  "minimumReleaseAgeBehaviour": "timestamp-optional",
+  "automerge": false,
+  "platformAutomerge": true,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["on monday"],
+    "automerge": true
+  },
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "schedule": [],
+    "dependencyDashboardApproval": false,
+    "minimumReleaseAge": null,
+    "prCreation": "immediate",
+    "automerge": false,
+    "groupName": null,
+    "addLabels": ["security"]
+  },
+  "packageRules": [
+    {
+      "description": "Routine minor, patch, digest and pin updates go in one weekly PR that merges itself once CI is green.",
+      "matchUpdateTypes": ["minor", "patch", "digest", "pin", "pinDigest"],
+      "groupName": "routine updates",
+      "automerge": true
+    },
+    {
+      "description": "A minor bump of a 0.x package may be breaking, so it gets its own PR and a manual merge, like a major.",
+      "matchUpdateTypes": ["minor"],
+      "matchCurrentVersion": "/^0\\./",
+      "groupName": null,
+      "automerge": false,
+      "addLabels": ["major-update"]
+    },
+    {
+      "description": "Major updates open as their own PR without dashboard approval, and wait for a manual merge.",
+      "matchUpdateTypes": ["major"],
+      "groupName": null,
+      "dependencyDashboardApproval": false,
+      "automerge": false,
+      "addLabels": ["major-update"]
+    }
+  ]
+}
