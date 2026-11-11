@@ -1,30 +1,54 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": ["The runtime lines every repo is on. Raise a ceiling here to move the whole fleet."],
+  "description": [
+    "Keeps every repo on the newest Node.js LTS line, moving all of a repo's Node pins together."
+  ],
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Read a `>=N` Node floor in package.json engines as a Node pin, so it moves with CI, .nvmrc and the Docker base.",
-      "managerFilePatterns": ["/(^|/)package\\.json$/"],
-      "matchStrings": ["\"engines\"\\s*:\\s*\\{[^}]*?\"node\"\\s*:\\s*\">=\\s*(?<currentValue>\\d+(?:\\.\\d+){0,2})\\s*\""],
+      "description": "Read a `>=N` Node floor in package.json engines as a Node pin, so it moves with CI, .nvmrc and the Docker base. Renovate's own engines handling never raises a `>=` floor.",
+      "managerFilePatterns": [
+        "/(^|/)package\\.json$/"
+      ],
+      "matchStrings": [
+        "\"engines\"\\s*:\\s*\\{[^}]*?\"node\"\\s*:\\s*\">=\\s*(?<currentValue>\\d+(?:\\.\\d+){0,2})\\s*\""
+      ],
       "depNameTemplate": "node",
       "depTypeTemplate": "engines-floor",
       "datasourceTemplate": "node-version",
-      "extractVersionTemplate": "^v?(?<version>\\d+)\\.",
-      "versioningTemplate": "loose"
+      "versioningTemplate": "node"
     }
   ],
   "packageRules": [
     {
-      "description": "Node.js line: stay on 26 until this ceiling is raised.",
-      "matchPackageNames": ["node", "@types/node", "actions/node-versions"],
-      "allowedVersions": "<27"
+      "description": "Move every Node pin in a repo to a new LTS major in one PR. There is no ceiling: a new LTS line is proposed as soon as Renovate sees it.",
+      "matchPackageNames": [
+        "node",
+        "@types/node",
+        "actions/node-versions"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "groupName": "Node.js runtime"
     },
     {
-      "description": "Move every Node pin in a repo to a new major in one PR.",
-      "matchPackageNames": ["node", "@types/node", "actions/node-versions"],
-      "matchUpdateTypes": ["major"],
-      "groupName": "Node.js runtime"
+      "description": "Node's odd-numbered lines never become LTS, so the types skip them too.",
+      "matchPackageNames": [
+        "@types/node"
+      ],
+      "allowedVersions": "/^\\d*[02468]\\./"
+    },
+    {
+      "description": "The floor names a line, not a release: only a new LTS major moves it, never a minor or patch.",
+      "matchDepTypes": [
+        "engines-floor"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "enabled": false
     }
   ]
 }
