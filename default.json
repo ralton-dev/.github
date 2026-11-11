@@ -51,9 +51,8 @@
       "addLabels": ["major-update"]
     },
     {
-      "description": "Major updates open as their own PR without dashboard approval, and wait for a manual merge.",
+      "description": "Major updates open as PRs without dashboard approval, and wait for a manual merge. No groupName here: this rule runs after the presets above, and clearing the group would undo the Node.js runtime grouping.",
       "matchUpdateTypes": ["major"],
-      "groupName": null,
       "dependencyDashboardApproval": false,
       "automerge": false,
       "addLabels": ["major-update"]
