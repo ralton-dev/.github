@@ -63,6 +63,23 @@
       "matchDepTypes": ["action"],
       "matchUpdateTypes": ["major"],
       "groupName": "GitHub Actions"
+    },
+    {
+      "description": "An override key scoped to a version line or a parent (`name@1`, `parent>child`) pins what that line or parent gets, so moving its value to a new major hands the new major to packages written for the old one. Drop those updates. Updates inside the line still arrive, and a bare-name override still gets its majors.",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["overrides", "pnpm.overrides", "pnpm-workspace.overrides"],
+      "matchDepNames": ["/>|^@?[^@]+@/"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "description": "The same for a 0.x minor on a scoped override key, which may be breaking, as the 0.x rule above treats it.",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["overrides", "pnpm.overrides", "pnpm-workspace.overrides"],
+      "matchDepNames": ["/>|^@?[^@]+@/"],
+      "matchUpdateTypes": ["minor"],
+      "matchCurrentVersion": "/^0\\./",
+      "enabled": false
     }
   ]
 }
