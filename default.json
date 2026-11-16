@@ -56,6 +56,13 @@
       "dependencyDashboardApproval": false,
       "automerge": false,
       "addLabels": ["major-update"]
+    },
+    {
+      "description": "Major updates of GitHub Actions go in one PR per repo, still labelled and merged by hand through the rule above. Only `uses: owner/repo@ref` action references match: runner images, container images and the Node or tool versions passed to setup actions keep their own PRs and groups.",
+      "matchManagers": ["github-actions"],
+      "matchDepTypes": ["action"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "GitHub Actions"
     }
   ]
 }
