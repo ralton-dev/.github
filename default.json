@@ -111,10 +111,10 @@
       "enabled": false
     },
     {
-      "description": "Hold TypeScript below 7 in a repo that is below 7. typescript-eslint does not support TypeScript 7 and fails, and dependency-cruiser supports only <7 and under 7 cruises no modules, so its check passes while checking nothing. TypeScript 7 also removes `baseUrl`. A repo already on 7 keeps its 7.x updates. Remove this rule once typescript-eslint and dependency-cruiser both release TypeScript 7 support.",
+      "description": "Hold TypeScript below 7 in a repo that is below 7. typescript-eslint does not support TypeScript 7 and fails, and dependency-cruiser supports only <7 and under 7 cruises no modules, so its check passes while checking nothing. TypeScript 7 also removes `baseUrl`. A repo already on 7 keeps its 7.x updates. Remove this rule once typescript-eslint and dependency-cruiser both release TypeScript 7 support. The current version is a regex on the major, because a regex is checked against the locked version or, when Renovate finds none (an npm workspace package whose TypeScript is hoisted to the root), the declared range; a version range here is checked against the locked version only and would not match.",
       "matchDatasources": ["npm"],
       "matchPackageNames": ["typescript"],
-      "matchCurrentVersion": "<7.0.0",
+      "matchCurrentVersion": "/^[^0-9]*[0-6](\\.|$)/",
       "allowedVersions": "<7.0.0"
     }
   ]
