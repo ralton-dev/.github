@@ -65,6 +65,27 @@
       "groupName": "GitHub Actions"
     },
     {
+      "description": "Move every Python pin in a repo to a new feature release (3.x to 3.y) in one PR, merged by hand like a Node major. Renovate calls 3.12 to 3.15 a minor, so without this it rides in the routine PR and merges itself. Matches requires-python, .python-version, `python` images, setup-python, and asdf, mise and Poetry pins. Patch releases stay routine. This lives here, not in runtimes.json, because it must run after the routine rule, which would otherwise take the minor back.",
+      "matchDatasources": [
+        "python-version",
+        "docker",
+        "github-releases",
+        "github-tags"
+      ],
+      "matchPackageNames": [
+        "python",
+        "docker.io/python",
+        "docker.io/library/python",
+        "actions/python-versions",
+        "python/cpython",
+        "containerbase/python-prebuild"
+      ],
+      "matchUpdateTypes": ["major", "minor"],
+      "groupName": "Python runtime",
+      "automerge": false,
+      "addLabels": ["major-update"]
+    },
+    {
       "description": "An override key scoped to a version line or a parent (`name@1`, `parent>child`) pins what that line or parent gets, so moving its value to a new major hands the new major to packages written for the old one. Drop those updates. Updates inside the line still arrive, and a bare-name override still gets its majors.",
       "matchManagers": ["npm"],
       "matchDepTypes": [
